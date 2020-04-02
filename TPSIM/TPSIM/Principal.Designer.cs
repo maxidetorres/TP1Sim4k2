@@ -221,7 +221,6 @@
             this.btn_clear.TabIndex = 13;
             this.btn_clear.Text = "Limpiar todo";
             this.btn_clear.UseVisualStyleBackColor = true;
-            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click_1);
             // 
             // Principal
             // 

@@ -33,20 +33,6 @@ namespace TPSIM
                 txt_c.Enabled = false;
             btn_generar.Enabled = true;
         }
-
-        private void btn_clear_Click(object sender, EventArgs e)
-        {
-            //limpia todo lo del punto a
-            dgvNumeros.Rows.Clear();
-            btn_siguienteNumero.Enabled = false;
-            txt_c.Clear();
-            txt_g.Clear();
-            txt_k.Clear();
-            txt_semilla.Clear();
-            cmb_metodo.SelectedIndex = -1;
-            btn_generar.Enabled = false;
-            txt_c.Enabled = false;
-        }
         
         private void btn_generar_Click(object sender, EventArgs e)
         {
