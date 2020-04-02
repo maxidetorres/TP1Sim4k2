@@ -32,7 +32,6 @@
             this.txt_k = new System.Windows.Forms.TextBox();
             this.txt_g = new System.Windows.Forms.TextBox();
             this.btn_generar = new System.Windows.Forms.Button();
-            this.cmb_metodo = new System.Windows.Forms.ComboBox();
             this.lbl_semilla = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -43,35 +42,38 @@
             this.numero = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.btn_siguienteNumero = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label4 = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.rdb_cong_mixto = new System.Windows.Forms.RadioButton();
+            this.rdb_cong_multiplicativo = new System.Windows.Forms.RadioButton();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNumeros)).BeginInit();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // txt_semilla
             // 
             this.txt_semilla.Location = new System.Drawing.Point(136, 32);
             this.txt_semilla.Name = "txt_semilla";
-            this.txt_semilla.Size = new System.Drawing.Size(100, 22);
+            this.txt_semilla.Size = new System.Drawing.Size(100, 20);
             this.txt_semilla.TabIndex = 0;
             // 
             // txt_k
             // 
             this.txt_k.Location = new System.Drawing.Point(136, 81);
             this.txt_k.Name = "txt_k";
-            this.txt_k.Size = new System.Drawing.Size(100, 22);
+            this.txt_k.Size = new System.Drawing.Size(100, 20);
             this.txt_k.TabIndex = 1;
             // 
             // txt_g
             // 
             this.txt_g.Location = new System.Drawing.Point(136, 131);
             this.txt_g.Name = "txt_g";
-            this.txt_g.Size = new System.Drawing.Size(100, 22);
+            this.txt_g.Size = new System.Drawing.Size(100, 20);
             this.txt_g.TabIndex = 2;
             // 
             // btn_generar
             // 
-            this.btn_generar.Enabled = false;
             this.btn_generar.Location = new System.Drawing.Point(49, 311);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(81, 28);
@@ -80,25 +82,12 @@
             this.btn_generar.UseVisualStyleBackColor = true;
             this.btn_generar.Click += new System.EventHandler(this.btn_generar_Click);
             // 
-            // cmb_metodo
-            // 
-            this.cmb_metodo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmb_metodo.FormattingEnabled = true;
-            this.cmb_metodo.Items.AddRange(new object[] {
-            "Congruencial Mixto",
-            "Congruencial Multiplicativo"});
-            this.cmb_metodo.Location = new System.Drawing.Point(136, 234);
-            this.cmb_metodo.Name = "cmb_metodo";
-            this.cmb_metodo.Size = new System.Drawing.Size(169, 24);
-            this.cmb_metodo.TabIndex = 4;
-            this.cmb_metodo.SelectedIndexChanged += new System.EventHandler(this.cmb_metodo_SelectedIndexChanged);
-            // 
             // lbl_semilla
             // 
             this.lbl_semilla.AutoSize = true;
             this.lbl_semilla.Location = new System.Drawing.Point(77, 35);
             this.lbl_semilla.Name = "lbl_semilla";
-            this.lbl_semilla.Size = new System.Drawing.Size(53, 17);
+            this.lbl_semilla.Size = new System.Drawing.Size(40, 13);
             this.lbl_semilla.TabIndex = 5;
             this.lbl_semilla.Text = "Semilla";
             // 
@@ -107,7 +96,7 @@
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(47, 82);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(83, 17);
+            this.label1.Size = new System.Drawing.Size(64, 13);
             this.label1.TabIndex = 6;
             this.label1.Text = "Constante k";
             // 
@@ -116,16 +105,15 @@
             this.label2.AutoSize = true;
             this.label2.Location = new System.Drawing.Point(46, 134);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(84, 17);
+            this.label2.Size = new System.Drawing.Size(64, 13);
             this.label2.TabIndex = 7;
             this.label2.Text = "Constante g";
             // 
             // txt_c
             // 
-            this.txt_c.Enabled = false;
             this.txt_c.Location = new System.Drawing.Point(136, 179);
             this.txt_c.Name = "txt_c";
-            this.txt_c.Size = new System.Drawing.Size(100, 22);
+            this.txt_c.Size = new System.Drawing.Size(100, 20);
             this.txt_c.TabIndex = 8;
             // 
             // label3
@@ -133,7 +121,7 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(47, 182);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(83, 17);
+            this.label3.Size = new System.Drawing.Size(64, 13);
             this.label3.TabIndex = 9;
             this.label3.Text = "Constante c";
             // 
@@ -150,7 +138,7 @@
             this.dgvNumeros.RowHeadersVisible = false;
             this.dgvNumeros.RowHeadersWidth = 51;
             this.dgvNumeros.RowTemplate.Height = 24;
-            this.dgvNumeros.Size = new System.Drawing.Size(240, 375);
+            this.dgvNumeros.Size = new System.Drawing.Size(151, 375);
             this.dgvNumeros.TabIndex = 10;
             // 
             // iteracion
@@ -159,7 +147,7 @@
             this.iteracion.HeaderText = "Iteración";
             this.iteracion.MinimumWidth = 6;
             this.iteracion.Name = "iteracion";
-            this.iteracion.Width = 91;
+            this.iteracion.Width = 73;
             // 
             // numero
             // 
@@ -167,21 +155,22 @@
             this.numero.HeaderText = "Numero";
             this.numero.MinimumWidth = 6;
             this.numero.Name = "numero";
-            this.numero.Width = 87;
+            this.numero.Width = 69;
             // 
             // btn_siguienteNumero
             // 
-            this.btn_siguienteNumero.Enabled = false;
-            this.btn_siguienteNumero.Location = new System.Drawing.Point(163, 311);
+            this.btn_siguienteNumero.Location = new System.Drawing.Point(156, 311);
             this.btn_siguienteNumero.Name = "btn_siguienteNumero";
-            this.btn_siguienteNumero.Size = new System.Drawing.Size(142, 28);
+            this.btn_siguienteNumero.Size = new System.Drawing.Size(125, 28);
             this.btn_siguienteNumero.TabIndex = 11;
             this.btn_siguienteNumero.Text = "Siguiente numero";
             this.btn_siguienteNumero.UseVisualStyleBackColor = true;
+            this.btn_siguienteNumero.Click += new System.EventHandler(this.btn_siguienteNumero_Click);
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.label4);
+            this.groupBox1.Controls.Add(this.button1);
+            this.groupBox1.Controls.Add(this.groupBox2);
             this.groupBox1.Controls.Add(this.txt_semilla);
             this.groupBox1.Controls.Add(this.btn_siguienteNumero);
             this.groupBox1.Controls.Add(this.txt_k);
@@ -190,7 +179,6 @@
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.btn_generar);
             this.groupBox1.Controls.Add(this.txt_c);
-            this.groupBox1.Controls.Add(this.cmb_metodo);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.lbl_semilla);
             this.groupBox1.Controls.Add(this.label1);
@@ -201,18 +189,55 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Punto a)";
             // 
-            // label4
+            // groupBox2
             // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(75, 237);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(55, 17);
-            this.label4.TabIndex = 12;
-            this.label4.Text = "Metodo";
+            this.groupBox2.Controls.Add(this.rdb_cong_mixto);
+            this.groupBox2.Controls.Add(this.rdb_cong_multiplicativo);
+            this.groupBox2.Location = new System.Drawing.Point(49, 227);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(232, 78);
+            this.groupBox2.TabIndex = 13;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Metodo";
+            // 
+            // rdb_cong_mixto
+            // 
+            this.rdb_cong_mixto.AutoSize = true;
+            this.rdb_cong_mixto.Location = new System.Drawing.Point(64, 42);
+            this.rdb_cong_mixto.Name = "rdb_cong_mixto";
+            this.rdb_cong_mixto.Size = new System.Drawing.Size(115, 17);
+            this.rdb_cong_mixto.TabIndex = 14;
+            this.rdb_cong_mixto.TabStop = true;
+            this.rdb_cong_mixto.Text = "Congruencial Mixto";
+            this.rdb_cong_mixto.UseVisualStyleBackColor = true;
+            // 
+            // rdb_cong_multiplicativo
+            // 
+            this.rdb_cong_multiplicativo.AutoSize = true;
+            this.rdb_cong_multiplicativo.Location = new System.Drawing.Point(64, 19);
+            this.rdb_cong_multiplicativo.Name = "rdb_cong_multiplicativo";
+            this.rdb_cong_multiplicativo.Size = new System.Drawing.Size(151, 17);
+            this.rdb_cong_multiplicativo.TabIndex = 15;
+            this.rdb_cong_multiplicativo.TabStop = true;
+            this.rdb_cong_multiplicativo.Text = "Congruencial Multiplicativo";
+            this.rdb_cong_multiplicativo.UseVisualStyleBackColor = true;
+            // 
+            // button1
+            // 
+            this.button1.BackColor = System.Drawing.Color.Gainsboro;
+            this.button1.Cursor = System.Windows.Forms.Cursors.VSplit;
+            this.button1.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.button1.Location = new System.Drawing.Point(505, 21);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(56, 27);
+            this.button1.TabIndex = 14;
+            this.button1.Text = "Limpiar";
+            this.button1.UseVisualStyleBackColor = false;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // Principal
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1222, 753);
             this.Controls.Add(this.groupBox1);
@@ -221,11 +246,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvNumeros)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
 
         private System.Windows.Forms.TextBox txt_semilla;
         private System.Windows.Forms.TextBox txt_k;
@@ -242,7 +270,10 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn numero;
         private System.Windows.Forms.Button btn_siguienteNumero;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.RadioButton rdb_cong_mixto;
+        private System.Windows.Forms.RadioButton rdb_cong_multiplicativo;
+        private System.Windows.Forms.Button button1;
     }
 }
 
