@@ -44,6 +44,7 @@
             this.btn_siguienteNumero = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label4 = new System.Windows.Forms.Label();
+            this.btn_clear = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvNumeros)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -72,7 +73,7 @@
             // btn_generar
             // 
             this.btn_generar.Enabled = false;
-            this.btn_generar.Location = new System.Drawing.Point(49, 311);
+            this.btn_generar.Location = new System.Drawing.Point(49, 284);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(81, 28);
             this.btn_generar.TabIndex = 3;
@@ -87,7 +88,7 @@
             this.cmb_metodo.Items.AddRange(new object[] {
             "Congruencial Mixto",
             "Congruencial Multiplicativo"});
-            this.cmb_metodo.Location = new System.Drawing.Point(136, 234);
+            this.cmb_metodo.Location = new System.Drawing.Point(136, 171);
             this.cmb_metodo.Name = "cmb_metodo";
             this.cmb_metodo.Size = new System.Drawing.Size(169, 24);
             this.cmb_metodo.TabIndex = 4;
@@ -123,7 +124,7 @@
             // txt_c
             // 
             this.txt_c.Enabled = false;
-            this.txt_c.Location = new System.Drawing.Point(136, 179);
+            this.txt_c.Location = new System.Drawing.Point(136, 205);
             this.txt_c.Name = "txt_c";
             this.txt_c.Size = new System.Drawing.Size(100, 22);
             this.txt_c.TabIndex = 8;
@@ -131,7 +132,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(47, 182);
+            this.label3.Location = new System.Drawing.Point(47, 208);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(83, 17);
             this.label3.TabIndex = 9;
@@ -172,15 +173,17 @@
             // btn_siguienteNumero
             // 
             this.btn_siguienteNumero.Enabled = false;
-            this.btn_siguienteNumero.Location = new System.Drawing.Point(163, 311);
+            this.btn_siguienteNumero.Location = new System.Drawing.Point(163, 284);
             this.btn_siguienteNumero.Name = "btn_siguienteNumero";
             this.btn_siguienteNumero.Size = new System.Drawing.Size(142, 28);
             this.btn_siguienteNumero.TabIndex = 11;
             this.btn_siguienteNumero.Text = "Siguiente numero";
             this.btn_siguienteNumero.UseVisualStyleBackColor = true;
+            this.btn_siguienteNumero.Click += new System.EventHandler(this.btn_siguienteNumero_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btn_clear);
             this.groupBox1.Controls.Add(this.label4);
             this.groupBox1.Controls.Add(this.txt_semilla);
             this.groupBox1.Controls.Add(this.btn_siguienteNumero);
@@ -204,11 +207,21 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(75, 237);
+            this.label4.Location = new System.Drawing.Point(75, 174);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(55, 17);
             this.label4.TabIndex = 12;
             this.label4.Text = "Metodo";
+            // 
+            // btn_clear
+            // 
+            this.btn_clear.Location = new System.Drawing.Point(122, 342);
+            this.btn_clear.Name = "btn_clear";
+            this.btn_clear.Size = new System.Drawing.Size(103, 33);
+            this.btn_clear.TabIndex = 13;
+            this.btn_clear.Text = "Limpiar todo";
+            this.btn_clear.UseVisualStyleBackColor = true;
+            this.btn_clear.Click += new System.EventHandler(this.btn_clear_Click_1);
             // 
             // Principal
             // 
@@ -243,6 +256,7 @@
         private System.Windows.Forms.Button btn_siguienteNumero;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btn_clear;
     }
 }
 
