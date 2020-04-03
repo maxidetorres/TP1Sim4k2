@@ -32,6 +32,7 @@ namespace TPSIM
             else
                 txt_c.Enabled = false;
             btn_generar.Enabled = true;
+            cmb_generacion.Enabled = false; //usar el punto a) bloquea el punto b) y c)
         }
 
         private void btn_generar_Click(object sender, EventArgs e)
@@ -111,9 +112,37 @@ namespace TPSIM
             txt_g.Clear();
             txt_k.Clear();
             txt_semilla.Clear();
+            txt_cant_generada.Clear();
             cmb_metodo.SelectedIndex = -1;
+            cmb_metodo.Enabled = true;
             btn_generar.Enabled = false;
             btn_siguienteNumero.Enabled = false;
+            cmb_generacion.SelectedIndex = -1;
+            cmb_generacion.Enabled = true;
+            txt_cant_generada.Enabled = false;
+        }
+
+        private void cmb_generacion_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_pruebaChi.Enabled = true;
+            txt_cant_generada.Enabled = true;
+            cmb_metodo.Enabled = false;
+        }
+
+        private void btn_pruebaChi_Click(object sender, EventArgs e)
+        {
+            //validar un intervalo seleccionado u obligar uno por defecto?
+
+            if (cmb_generacion.SelectedIndex == 0)
+            {
+                //generar usando random del lenguaje
+
+            }
+            else
+            {
+                //generar con el congruencial mixto
+
+            }
         }
         
         //Validar que el dato ingresado en los input sea solo numerico
