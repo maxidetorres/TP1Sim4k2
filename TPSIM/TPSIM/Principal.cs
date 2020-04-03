@@ -34,7 +34,7 @@ namespace TPSIM
             btn_generar.Enabled = true;
             cmb_generacion.Enabled = false; //usar el punto a) bloquea el punto b) y c)
         }
-        
+
         private void btn_generar_Click(object sender, EventArgs e)
         {
             //genera los 20 numeros del punto a
@@ -73,15 +73,20 @@ namespace TPSIM
             int siguiente = (a * sem + c) % (int)m;
             double random = siguiente / (m - 1); //falta truncarlo a 4 decimales
             this.semilla = siguiente;
-            return random;
+            return this.TruncateFunction(random);
         }
 
         private double congruencialMulti(int a, int sem, double m)
         {
             int siguiente = (a * sem) % (int)m;
-            double random = siguiente / (m - 1); //falta truncarlo a 4 decimales
+            double random = siguiente / (m - 1); 
             this.semilla = siguiente;
-            return random;
+            return this.TruncateFunction(random);
+        }
+        //truncar numero a 4 decimales
+        public double TruncateFunction(double number)
+        {
+            return Math.Truncate(10000 * number) / 10000;
         }
 
         private void btn_siguienteNumero_Click(object sender, EventArgs e)
@@ -138,6 +143,40 @@ namespace TPSIM
                 //generar con el congruencial mixto
 
             }
+        }
+        
+        //Validar que el dato ingresado en los input sea solo numerico
+        private void validate_only_number(object sender,KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+       (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Permite un solo decimal
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txt_semilla_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_k_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_g_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_c_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
         }
     }
 }
