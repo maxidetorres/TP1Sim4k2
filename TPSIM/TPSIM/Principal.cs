@@ -10,165 +10,144 @@ using System.Windows.Forms;
 
 namespace TPSIM
 {
-    public partial class Principal : Form{
-
-        double x;
-        double m1;
-        double aMix;
-        double aMul;
-        double c;
-
-        int ord;
-        List<double> lista = new List<double>();
+    public partial class Principal : Form
+    {
+        int semilla;
+        int k;
+        int g;
+        int c;
+        double m;
+        int ultimoTabla;
 
         public Principal()
         {
             InitializeComponent();
-            btn_siguienteNumero.Enabled = false;
+        }
 
-
+        private void cmb_metodo_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //habilito o no la constante c y el boton generar
+            if (cmb_metodo.SelectedIndex == 0)
+                txt_c.Enabled = true;
+            else
+                txt_c.Enabled = false;
+            btn_generar.Enabled = true;
         }
 
         private void btn_generar_Click(object sender, EventArgs e)
         {
-            var listError = new List<string>();
-            
-            double x0 = 0;
-            double k = 0;
-            int g = 0;
-            
+            //genera los 20 numeros del punto a
+            btn_siguienteNumero.Enabled = true; //el boton para seguir generando numeros de a uno
 
+            semilla = int.Parse(txt_semilla.Text);
+            k = int.Parse(txt_k.Text);
+            g = int.Parse(txt_g.Text);
+            m = Math.Pow(2, g);
 
-            dgvNumeros.Rows.Clear();
-            ord = 0;
-            if (txt_semilla.Text.Length != 0)
+            if (cmb_metodo.SelectedIndex == 0)
             {
-               x0 = double.Parse(txt_semilla.Text);
-            }
-            else
-            {
-               listError.Add("Debe ingresar valor en semilla.");
-
-            }
-
-            if (txt_k.Text.Length != 0)
-            {
-                k = double.Parse(txt_k.Text);
-            }
-            else
-            {
-               listError.Add("Debe ingresar valor en k");
-            }
-
-            if (txt_g.Text.Length != 0)
-            {
-                g = int.Parse(txt_g.Text);
-            }
-            else
-            {
-                listError.Add("Debe ingresar valor en g");
-            }
-
-            if (rdb_cong_mixto.Checked && txt_c.Text.Length ==0)
-            {
-                listError.Add("Debe ingresar valor en c.");
-            }
-
-            if (listError.Count !=0)
-            {
-                foreach (var mensaje in listError)
-                {
-                   MessageBox.Show(mensaje.ToString());
-                }
-                return;
-            }
-            
-          
-            var m = Math.Pow(2, g);
-            m1 = double.Parse(m.ToString());
-            
-
-            if (rdb_cong_mixto.Checked)
-            {
-
-               c = double.Parse(txt_c.Text);
-               aMix = 1 + 4 * k;
-
+                c = int.Parse(txt_c.Text);
+                int a = 1 + 4 * k;
                 for (int i = 0; i < 20; i++)
                 {
-                    x = ((aMix * x0) + c) % m;
-                    x0 = x;
-                    double r = TruncateFunction((x / (m1 - 1)), 4); 
-                    ord++;
-                    dgvNumeros.Rows.Add(ord, r);
-                    lista.Add(r);
+                    double random = congruencialMixto(c, a, semilla, m);
+                    dgvNumeros.Rows.Add(i + 1, random);
+                    ultimoTabla = i + 2;
                 }
-
             }
-
-
-            if (rdb_cong_multiplicativo.Checked)
+            else
             {
-                aMul = 3 + 8 * k;
-
-
+                int a = 3 + 8 * k;
                 for (int i = 0; i < 20; i++)
                 {
-                    x = (aMul * x0) % m;
-                    x0 = x;
-                    double r = TruncateFunction((x / (m - 1)), 4);
-                    ord++;
-                    dgvNumeros.Rows.Add(ord, r);
+                    double random = congruencialMulti(a, semilla, m);
+                    dgvNumeros.Rows.Add(i + 1, random);
+                    ultimoTabla = i + 2;
                 }
-
-
             }
-
-            btn_siguienteNumero.Enabled = true;
-
         }
 
-
-        public double TruncateFunction(double number, int digits)
+        private double congruencialMixto(int c, int a, int sem, double m)
         {
-            double stepper = (double)(Math.Pow(10.0, (double)digits));
-            int temp = (int)(stepper * number);
-            return (double)temp / stepper;
+            int siguiente = (a * sem + c) % (int)m;
+            double random = siguiente / (m - 1); //falta truncarlo a 4 decimales
+            this.semilla = siguiente;
+            return this.TruncateFunction(random);
+        }
+
+        private double congruencialMulti(int a, int sem, double m)
+        {
+            int siguiente = (a * sem) % (int)m;
+            double random = siguiente / (m - 1); 
+            this.semilla = siguiente;
+            return this.TruncateFunction(random);
+        }
+        //truncar numero a 4 decimales
+        public double TruncateFunction(double number)
+        {
+            return Math.Truncate(10000 * number) / 10000;
         }
 
         private void btn_siguienteNumero_Click(object sender, EventArgs e)
         {
-            //Congruencial Mixto
-            if (rdb_cong_mixto.Checked)
+            if (cmb_metodo.SelectedIndex == 0)
             {
-                ord++;
-                double xsig = ((x * aMix) + c) % m1;
-                double res = TruncateFunction(xsig / (m1 - 1), 4); 
-                dgvNumeros.Rows.Add(ord, res);
-                x = xsig;
-                lista.Add(res);
+                int a = 1 + 4 * k;
+                double random = congruencialMixto(c, a, semilla, m);
+                dgvNumeros.Rows.Add(ultimoTabla++, random);
             }
-
-            //Congruencial Multiplicativo
-            if (rdb_cong_multiplicativo.Checked)
+            else
             {
-                ord++;
-                double xsig = (x * aMul) % m1;
-                double res = TruncateFunction(xsig / (m1 - 1), 4);
-                dgvNumeros.Rows.Add(ord, res);
-                x = xsig;
-
+                int a = 3 + 8 * k;
+                double random = congruencialMulti(a, semilla, m);
+                dgvNumeros.Rows.Add(ultimoTabla++, random);
             }
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btn_clear_Click(object sender, EventArgs e)
         {
-            txt_semilla.Clear();
-            txt_k.Clear();
-            txt_g.Clear();
-            txt_c.Clear();
-            btn_siguienteNumero.Enabled = false;
             dgvNumeros.Rows.Clear();
+            txt_c.Clear();
+            txt_g.Clear();
+            txt_k.Clear();
+            txt_semilla.Clear();
+            cmb_metodo.SelectedIndex = -1;
+            btn_generar.Enabled = false;
+            btn_siguienteNumero.Enabled = false;
+        }
+        
+        //Validar que el dato ingresado en los input sea solo numerico
+        private void validate_only_number(object sender,KeyPressEventArgs e) {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
+       (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Permite un solo decimal
+            if ((e.KeyChar == '.') && ((sender as TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+        private void txt_semilla_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_k_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_g_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_c_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
         }
     }
 }
