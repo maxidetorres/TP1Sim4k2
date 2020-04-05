@@ -18,6 +18,10 @@ namespace TPSIM
         int c;
         double m;
         int ultimoTabla;
+        int n; //Nro muestras para el Chi
+        int ki; //Nro intervalo seleccionado
+        // double[] aleatorio; //Armamos vector para guardar nros aleatorios del lenguaje
+
 
         public Principal()
         {
@@ -129,18 +133,43 @@ namespace TPSIM
             cmb_metodo.Enabled = false;
         }
 
+        //PUNTO B Y C
         private void btn_pruebaChi_Click(object sender, EventArgs e)
         {
             //validar un intervalo seleccionado u obligar uno por defecto?
 
-            if (cmb_generacion.SelectedIndex == 0)
+            //Tomo cantidad de muestra n ingresada
+            n = int.Parse(txt_cant_generada.Text);
+
+            //Tomo intervalo seleccionado
+            if (rbtn_5.Checked) { ki = 5; }
+            else if (rbtn_10.Checked) { ki = 10; }
+            else if (rbtn_15.Checked) { ki = 15; }
+            else if (rbtn_20.Checked) { ki = 20; }
+
+            //else if { }//Mostrar mensaje avisando que tiene que seleccionar uno
+
+            if (cmb_generacion.SelectedIndex == 0)  //generar usando random del lenguaje - PUNTO B
             {
-                //generar usando random del lenguaje
+
+                //Generamos aleatorios
+                double[] aleatorio = new double[n];
+                Random rnd = new Random();
+                double nro;
+                for (int i = 0; i < n; i++)
+                {
+                    nro = TruncateFunction(rnd.NextDouble());
+                    aleatorio[i] = nro;
+                    System.Console.WriteLine(aleatorio[i]); //Mostramos en salida para corroborar
+
+                }
+
+
 
             }
             else
             {
-                //generar con el congruencial mixto
+                //generar con el congruencial mixto - PUNTO C
 
             }
         }
