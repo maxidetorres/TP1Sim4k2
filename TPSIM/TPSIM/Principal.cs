@@ -116,15 +116,17 @@ namespace TPSIM
         {
             dgvNumeros.Rows.Clear();
             txt_c.Clear();
+            txt_c.Enabled = false;
             txt_g.Clear();
             txt_k.Clear();
             txt_semilla.Clear();
             txt_cant_generada.Clear();
-            cmb_metodo.SelectedIndex = -1;
-            cmb_metodo.Enabled = true;
-            btn_generar.Enabled = false;
             btn_siguienteNumero.Enabled = false;
             cmb_generacion.SelectedIndex = -1;
+            cmb_metodo.SelectedIndex = -1;
+            btn_generar.Enabled = false;
+            btn_pruebaChi.Enabled = false;
+            cmb_metodo.Enabled = true;
             cmb_generacion.Enabled = true;
             txt_cant_generada.Enabled = false;
             grafico.Series.Clear();
@@ -133,7 +135,7 @@ namespace TPSIM
             lbl_gl.Text = "";
             lbl_resultado.Text = "";
             txt_valor.Clear();
-
+            label8.Visible = false;
         }
 
         private void cmb_generacion_SelectedIndexChanged(object sender, EventArgs e)
@@ -141,6 +143,11 @@ namespace TPSIM
             btn_pruebaChi.Enabled = true;
             txt_cant_generada.Enabled = true;
             cmb_metodo.Enabled = false;
+            if(cmb_generacion.SelectedIndex == 1)
+            {
+                txt_c.Enabled = true;
+                label8.Visible = true;
+            }
         }
 
         //PUNTO B Y C
@@ -159,11 +166,13 @@ namespace TPSIM
 
             //else if { }//Mostrar mensaje avisando que tiene que seleccionar uno
 
+            double[] aleatorios = new double[n]; // vector de aleatorios, Lo movi aca para no tener que crear otro
+
             if (cmb_generacion.SelectedIndex == 0)  //generar usando random del lenguaje - PUNTO B
             {
 
                 //Generamos aleatorios y guardo en vector
-                double[] aleatorios = new double[n]; // vector de aleatorios
+                
                 Random rnd = new Random();
                 double nro; //nro random
                 for (int i = 0; i < n; i++)
@@ -174,19 +183,33 @@ namespace TPSIM
 
                 }
                 
-                GenerarResultados(ki, aleatorios);
+                
 
                 //Generamos intervalos 
                 
             }
-
-            
         
             else
             {
-                //generar con el congruencial mixto - PUNTO C
+                //validar que esto este cargado
+                c = int.Parse(txt_c.Text);
+                semilla = int.Parse(txt_semilla.Text);
+                k = int.Parse(txt_k.Text);
+                g = int.Parse(txt_g.Text);
 
+                //generar con el congruencial mixto - PUNTO C
+                int a = 1 + 4 * k;
+                m = Math.Pow(2, g);
+                double nro;
+                for (int i = 0; i < n; i++)
+                {
+                    nro = congruencialMixto(c, a, semilla, m);
+                    aleatorios[i] = nro;
+                    System.Console.WriteLine(aleatorios[i]);
+                }
             }
+
+            GenerarResultados(ki, aleatorios); //por cualquiera de los caminos esto se hace lo mismo y de la misma forma
         }
 
 
