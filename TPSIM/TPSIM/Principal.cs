@@ -128,7 +128,7 @@ namespace TPSIM
 
         private void cmb_generacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btn_pruebaChi.Enabled = true;
+            //btn_pruebaChi.Enabled = true;
             txt_cant_generada.Enabled = true;
             cmb_metodo.Enabled = false;
         }
@@ -206,6 +206,19 @@ namespace TPSIM
         private void txt_c_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.validate_only_number(sender, e);
+        }
+
+        private void txt_cant_generada_Validating(object sender, CancelEventArgs e)
+        {
+            if (txt_cant_generada.Text != "")
+            {
+                btn_pruebaChi.Enabled = true;
+            }
+            else {
+                btn_pruebaChi.Enabled = false;
+                e.Cancel = true;
+            }
+            
         }
     }
 }
