@@ -80,7 +80,7 @@ namespace TPSIM
             int siguiente = (a * sem + c) % (int)m;
             double random = siguiente / (m - 1); //falta truncarlo a 4 decimales
             this.semilla = siguiente;
-            return this.TruncateFunction(random);
+            return this.TruncateFunction(random, 4);
         }
 
         private double congruencialMulti(int a, int sem, double m)
@@ -88,12 +88,12 @@ namespace TPSIM
             int siguiente = (a * sem) % (int)m;
             double random = siguiente / (m - 1); 
             this.semilla = siguiente;
-            return this.TruncateFunction(random);
+            return this.TruncateFunction(random, 4);
         }
         //truncar numero a 4 decimales
-        public double TruncateFunction(double number)
+        public double TruncateFunction(double number, int digit)  
         {
-            return Math.Truncate(10000 * number) / 10000;
+            return Math.Truncate((Math.Pow(10.0, (double) digit) * number)) / (Math.Pow(10.0, (double)digit));
         }
 
         private void btn_siguienteNumero_Click(object sender, EventArgs e)
@@ -140,7 +140,7 @@ namespace TPSIM
 
         private void cmb_generacion_SelectedIndexChanged(object sender, EventArgs e)
         {
-            btn_pruebaChi.Enabled = true;
+            //btn_pruebaChi.Enabled = true;
             txt_cant_generada.Enabled = true;
             cmb_metodo.Enabled = false;
             if(cmb_generacion.SelectedIndex == 1)
@@ -177,7 +177,7 @@ namespace TPSIM
                 double nro; //nro random
                 for (int i = 0; i < n; i++)
                 {
-                    nro = TruncateFunction(rnd.NextDouble());
+                    nro = TruncateFunction(rnd.NextDouble(),4);
                     aleatorios[i] = nro;
                     System.Console.WriteLine(aleatorios[i]); //Mostramos en salida para corroborar
 
@@ -216,17 +216,20 @@ namespace TPSIM
 
         private void GenerarResultados(int kintervalo, double[] aleatorio)
         {
+            double superior;
             Intervalo[] intervalo; //vector de subintervalos
             intervalo = new Intervalo[kintervalo]; //creo los subintervalos del histograma
             for (int i = 0; i < kintervalo; i++)
             {
                 if (i == 0)
                 {
-                    intervalo[i] = new Intervalo(0, (((float)1 / kintervalo)) - (float)0.0001);
+                    superior = this.TruncateFunction((double)(((float)1 / kintervalo)) * (i + 1),4);
+                    intervalo[i] = new Intervalo(0, (float)superior);
                 }
                 else
                 {
-                    intervalo[i] = new Intervalo(intervalo[i - 1].LimiteSuperior, (((float)1 / kintervalo) - (float)0.0001) * (i + 1));
+                    superior = this.TruncateFunction((double)(((float)1 / kintervalo)) * (i + 1),4);
+                    intervalo[i] = new Intervalo(intervalo[i - 1].LimiteSuperior, (float)superior);
                 }
             }
 
@@ -252,8 +255,17 @@ namespace TPSIM
             {
                 cantidades.Add(intervalo[i].CantidadObservaciones);
                 grafico.Series[0].Points.Add(intervalo[i].CantidadObservaciones);
-                grafico.Series[0].Points[i].AxisLabel = "[" + intervalo[i].LimiteInferior + " - " + intervalo[i].LimiteSuperior + "]";
+                double limiteInferior = this.TruncateFunction(intervalo[i].LimiteInferior, 2);
+                double limiteSuperior = this.TruncateFunction(intervalo[i].LimiteSuperior, 2);
+
+                grafico.ChartAreas[0].AxisX.MajorGrid.LineWidth = 0;
+                grafico.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
+                grafico.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
                 grafico.Series[0].IsValueShownAsLabel = true;
+                grafico.ChartAreas[0].AxisX.Interval = 1;
+                grafico.Series[0].Points[i].AxisLabel = "[" + limiteInferior + " - " + limiteSuperior + "]";
+               
+                
             }
             double cantidadObservaciones = double.Parse(lista.Count.ToString());
             grafico.ChartAreas[0].AxisY.Maximum = cantidades.Max();
@@ -261,7 +273,7 @@ namespace TPSIM
             //Calculamos y mostramos la frecuencia esperada
             
             lbl_gl.Text = (kintervalo - 1).ToString(); //mostrar
-            grafico.Series["Frecuecias Observadas"].Color = Color.Fuchsia;
+            grafico.Series["Frecuecias Observadas"].Color = Color.BlueViolet;
 
             //cargamos la tabla de frecuencias;
             for (int i = 0; i < intervalo.Length; i++)
@@ -350,6 +362,19 @@ namespace TPSIM
         private void txt_c_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.validate_only_number(sender, e);
+        }
+
+        private void txt_cant_generada_Validating(object sender, CancelEventArgs e)
+        {
+            if (txt_cant_generada.Text != "")
+            {
+                btn_pruebaChi.Enabled = true;
+            }
+            else {
+                btn_pruebaChi.Enabled = false;
+                e.Cancel = true;
+            }
+            
         }
 
         private void GroupBox5_Enter(object sender, EventArgs e)
