@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
+
 namespace TPSIM
 {
     public partial class Principal : Form
@@ -21,6 +22,8 @@ namespace TPSIM
         int n; //Nro muestras para el Chi
         int ki; //Nro intervalo seleccionado
         // double[] aleatorio; //Armamos vector para guardar nros aleatorios del lenguaje
+        List<double> lista = new List<double>();
+        double chi;
 
 
         public Principal()
@@ -124,6 +127,13 @@ namespace TPSIM
             cmb_generacion.SelectedIndex = -1;
             cmb_generacion.Enabled = true;
             txt_cant_generada.Enabled = false;
+            grafico.Series.Clear();
+            dataGridView1.Rows.Clear();
+            lbl_chi.Text = "";
+            lbl_gl.Text = "";
+            lbl_resultado.Text = "";
+            txt_valor.Clear();
+
         }
 
         private void cmb_generacion_SelectedIndexChanged(object sender, EventArgs e)
@@ -152,28 +162,139 @@ namespace TPSIM
             if (cmb_generacion.SelectedIndex == 0)  //generar usando random del lenguaje - PUNTO B
             {
 
-                //Generamos aleatorios
-                double[] aleatorio = new double[n];
+                //Generamos aleatorios y guardo en vector
+                double[] aleatorios = new double[n]; // vector de aleatorios
                 Random rnd = new Random();
-                double nro;
+                double nro; //nro random
                 for (int i = 0; i < n; i++)
                 {
                     nro = TruncateFunction(rnd.NextDouble());
-                    aleatorio[i] = nro;
-                    System.Console.WriteLine(aleatorio[i]); //Mostramos en salida para corroborar
+                    aleatorios[i] = nro;
+                    System.Console.WriteLine(aleatorios[i]); //Mostramos en salida para corroborar
 
                 }
+                
+                GenerarResultados(ki, aleatorios);
 
-
-
+                //Generamos intervalos 
+                
             }
+
+            
+        
             else
             {
                 //generar con el congruencial mixto - PUNTO C
 
             }
         }
-        
+
+
+
+        private void GenerarResultados(int kintervalo, double[] aleatorio)
+        {
+            Intervalo[] intervalo; //vector de subintervalos
+            intervalo = new Intervalo[kintervalo]; //creo los subintervalos del histograma
+            for (int i = 0; i < kintervalo; i++)
+            {
+                if (i == 0)
+                {
+                    intervalo[i] = new Intervalo(0, (((float)1 / kintervalo)) - (float)0.0001);
+                }
+                else
+                {
+                    intervalo[i] = new Intervalo(intervalo[i - 1].LimiteSuperior, (((float)1 / kintervalo) - (float)0.0001) * (i + 1));
+                }
+            }
+
+            //ahora recorremos la lista para calcular las frecuencias.
+            for (int i = 0; i < aleatorio.Length; i++)
+            {
+                for (int j = 0; j < intervalo.Length; j++)
+                {
+                    if (aleatorio[i] >= intervalo[j].LimiteInferior && aleatorio[i] < intervalo[j].LimiteSuperior) //Pongo sólo MENOR y no <=
+                    {
+                        intervalo[j].CantidadObservaciones++;
+                    }
+                }
+            }
+
+
+            //limpiamos el chart y preparamos el nuevo histograma
+            List<int> cantidades = new List<int>();//lista para acumular las cantidades de cada intervalo y luego poder obtener el MAX()
+            grafico.Series.Clear();
+            grafico.Series.Add("Frecuecias Observadas");
+
+            for (int i = 0; i < kintervalo; i++)
+            {
+                cantidades.Add(intervalo[i].CantidadObservaciones);
+                grafico.Series[0].Points.Add(intervalo[i].CantidadObservaciones);
+                grafico.Series[0].Points[i].AxisLabel = "[" + intervalo[i].LimiteInferior + " - " + intervalo[i].LimiteSuperior + "]";
+                grafico.Series[0].IsValueShownAsLabel = true;
+            }
+            double cantidadObservaciones = double.Parse(lista.Count.ToString());
+            grafico.ChartAreas[0].AxisY.Maximum = cantidades.Max();
+            
+            //Calculamos y mostramos la frecuencia esperada
+            
+            lbl_gl.Text = (kintervalo - 1).ToString(); //mostrar
+            grafico.Series["Frecuecias Observadas"].Color = Color.Fuchsia;
+
+            //cargamos la tabla de frecuencias;
+            for (int i = 0; i < intervalo.Length; i++)
+            {
+                string subint = intervalo[i].LimiteInferior + " - " + intervalo[i].LimiteSuperior;
+                double freEsp = n / ki;
+                dataGridView1.Rows.Add(subint, intervalo[i].CantidadObservaciones, freEsp, (Math.Pow((intervalo[i].CantidadObservaciones - freEsp), 2)) / freEsp);
+            }
+            double suma = 0;
+            foreach (DataGridViewRow row in dataGridView1.Rows)
+            {
+                suma += Convert.ToDouble(row.Cells[3].Value);
+            }
+            chi = suma;
+            lbl_chi.Text = Convert.ToString(chi);//mostramos el chi2
+            grafico.Visible = true;
+
+
+        }
+
+
+
+
+        //Metodo exportación a Excel
+        /*
+        private void ExportarExcel(double[] rnd)
+        {
+            SaveFileDialog fichero = new SaveFileDialog();
+            fichero.Filter = "Excel (*.xls)|*.xls";
+            if (fichero.ShowDialog() == DialogResult.OK)
+            {
+                Microsoft.Office.Interop.Excel.Application aplicacion;
+                Microsoft.Office.Interop.Excel.Workbook libros_trabajo;
+                Microsoft.Office.Interop.Excel.Worksheet hoja_trabajo;
+                aplicacion = new Microsoft.Office.Interop.Excel.Application();
+                libros_trabajo = aplicacion.Workbooks.Add();
+                hoja_trabajo =
+                    (Microsoft.Office.Interop.Excel.Worksheet)libros_trabajo.Worksheets.get_Item(1);
+                //Recorremos el Vector rellenando la hoja de trabajo
+                
+                for (int i = 0; i < rnd.Length; i++)
+                {
+                    
+                   // for (int j = 0; j < rnd.Length; j++)
+                    ////{
+                        hoja_trabajo.Cells[i + 1, 1] = rnd[i]; //grd.Rows[i].Cells[j].Value.ToString();
+                   // }
+                }
+                libros_trabajo.SaveAs(fichero.FileName,
+                    Microsoft.Office.Interop.Excel.XlFileFormat.xlWorkbookNormal);
+                libros_trabajo.Close(true);
+                aplicacion.Quit();
+            }
+        }
+        */
+
         //Validar que el dato ingresado en los input sea solo numerico
         private void validate_only_number(object sender,KeyPressEventArgs e) {
             if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
@@ -206,6 +327,38 @@ namespace TPSIM
         private void txt_c_KeyPress(object sender, KeyPressEventArgs e)
         {
             this.validate_only_number(sender, e);
+        }
+
+        private void GroupBox5_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Grafico_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void GroupBox6_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Lbl_chi_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void Btn_hipotesis_Click(object sender, EventArgs e)
+        {
+            if (chi <= double.Parse(txt_valor.Text))
+           {
+                lbl_resultado.Text = "Hipótesis Rechazada";
+            }
+            else
+            {
+                lbl_resultado.Text = "Hipótesis Aceptada";
+            }
         }
     }
 }
