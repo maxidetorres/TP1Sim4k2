@@ -256,14 +256,14 @@ namespace TPSIM
             grafico.Series.Add("Frecuecias Observadas");
             grafico.Series.Add("Frecuecias Esperada");
 
-            double freEsp = n / ki;
+            double freEsp = n / ki;//calculo de la frecuencia esperada
 
 
             for (int i = 0; i < kintervalo; i++)
             {
                 cantidades.Add(intervalo[i].CantidadObservaciones);
                 grafico.Series[0].Points.Add(intervalo[i].CantidadObservaciones);
-                grafico.Series[1].Points.Add(freEsp);
+                grafico.Series[1].Points.Add(freEsp);//se agrega al grafico por cada intervalo
 
                 double limiteInferior = this.TruncateFunction(intervalo[i].LimiteInferior, 2);
                 double limiteSuperior = this.TruncateFunction(intervalo[i].LimiteSuperior, 2);
@@ -280,7 +280,7 @@ namespace TPSIM
             double cantidadObservaciones = double.Parse(lista.Count.ToString());
             grafico.ChartAreas[0].AxisY.Maximum = cantidades.Max();
             
-            //Calculamos y mostramos la frecuencia esperada
+            //Calculamos y mostramos la frecuencia esperada y observada
 
             lbl_gl.Text = (kintervalo - 1).ToString(); //mostrar
             grafico.Series["Frecuecias Observadas"].Color = Color.BlueViolet;
@@ -290,9 +290,9 @@ namespace TPSIM
             for (int i = 0; i < intervalo.Length; i++)
             {
                 string subint = intervalo[i].LimiteInferior + " - " + intervalo[i].LimiteSuperior;
-                double freEsp1 = n / ki;
-                double valorAcumulado = (Math.Pow((intervalo[i].CantidadObservaciones - freEsp1), 2)) / freEsp1;
-                dataGridView1.Rows.Add(subint, intervalo[i].CantidadObservaciones, freEsp1,this.TruncateFunction(valorAcumulado,4));
+                //double freEsp = n / ki;
+                double valorAcumulado = (Math.Pow((intervalo[i].CantidadObservaciones - freEsp), 2)) / freEsp;
+                dataGridView1.Rows.Add(subint, intervalo[i].CantidadObservaciones, freEsp,this.TruncateFunction(valorAcumulado,4));
             }
             
             foreach (DataGridViewRow row in dataGridView1.Rows)
