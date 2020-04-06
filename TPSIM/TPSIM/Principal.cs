@@ -136,6 +136,7 @@ namespace TPSIM
             lbl_resultado.Text = "";
             txt_valor.Clear();
             label8.Visible = false;
+            btn_hipotesis.Enabled = false;
         }
 
         private void cmb_generacion_SelectedIndexChanged(object sender, EventArgs e)
@@ -217,7 +218,10 @@ namespace TPSIM
         private void GenerarResultados(int kintervalo, double[] aleatorio)
         {
             double superior;
-            Intervalo[] intervalo; //vector de subintervalos
+            double suma = 0;
+            dataGridView1.Rows.Clear();
+            btn_hipotesis.Enabled = true;
+           Intervalo[] intervalo; //vector de subintervalos
             intervalo = new Intervalo[kintervalo]; //creo los subintervalos del histograma
             for (int i = 0; i < kintervalo; i++)
             {
@@ -250,11 +254,17 @@ namespace TPSIM
             List<int> cantidades = new List<int>();//lista para acumular las cantidades de cada intervalo y luego poder obtener el MAX()
             grafico.Series.Clear();
             grafico.Series.Add("Frecuecias Observadas");
+            grafico.Series.Add("Frecuecias Esperada");
+
+            double freEsp = n / ki;//calculo de la frecuencia esperada
+
 
             for (int i = 0; i < kintervalo; i++)
             {
                 cantidades.Add(intervalo[i].CantidadObservaciones);
                 grafico.Series[0].Points.Add(intervalo[i].CantidadObservaciones);
+                grafico.Series[1].Points.Add(freEsp);//se agrega al grafico por cada intervalo
+
                 double limiteInferior = this.TruncateFunction(intervalo[i].LimiteInferior, 2);
                 double limiteSuperior = this.TruncateFunction(intervalo[i].LimiteSuperior, 2);
 
@@ -262,27 +272,29 @@ namespace TPSIM
                 grafico.ChartAreas[0].AxisY.MajorGrid.LineWidth = 0;
                 grafico.ChartAreas[0].AxisX.LabelStyle.Angle = 90;
                 grafico.Series[0].IsValueShownAsLabel = true;
+                grafico.Series[1].IsValueShownAsLabel = true;
                 grafico.ChartAreas[0].AxisX.Interval = 1;
                 grafico.Series[0].Points[i].AxisLabel = "[" + limiteInferior + " - " + limiteSuperior + "]";
-               
                 
             }
             double cantidadObservaciones = double.Parse(lista.Count.ToString());
             grafico.ChartAreas[0].AxisY.Maximum = cantidades.Max();
             
-            //Calculamos y mostramos la frecuencia esperada
-            
+            //Calculamos y mostramos la frecuencia esperada y observada
+
             lbl_gl.Text = (kintervalo - 1).ToString(); //mostrar
             grafico.Series["Frecuecias Observadas"].Color = Color.BlueViolet;
+            grafico.Series["Frecuecias Esperada"].Color = Color.Red;
 
             //cargamos la tabla de frecuencias;
             for (int i = 0; i < intervalo.Length; i++)
             {
                 string subint = intervalo[i].LimiteInferior + " - " + intervalo[i].LimiteSuperior;
-                double freEsp = n / ki;
-                dataGridView1.Rows.Add(subint, intervalo[i].CantidadObservaciones, freEsp, (Math.Pow((intervalo[i].CantidadObservaciones - freEsp), 2)) / freEsp);
+                //double freEsp = n / ki;
+                double valorAcumulado = (Math.Pow((intervalo[i].CantidadObservaciones - freEsp), 2)) / freEsp;
+                dataGridView1.Rows.Add(subint, intervalo[i].CantidadObservaciones, freEsp,this.TruncateFunction(valorAcumulado,4));
             }
-            double suma = 0;
+            
             foreach (DataGridViewRow row in dataGridView1.Rows)
             {
                 suma += Convert.ToDouble(row.Cells[3].Value);
@@ -407,6 +419,36 @@ namespace TPSIM
             {
                 lbl_resultado.Text = "Hipótesis Aceptada";
             }
+        }
+
+        private void txt_semilla_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_k_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_g_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_c_KeyPress_1(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_cant_generada_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
+        }
+
+        private void txt_valor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            this.validate_only_number(sender, e);
         }
     }
 }
