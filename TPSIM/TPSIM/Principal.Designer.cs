@@ -49,6 +49,14 @@
             this.label4 = new System.Windows.Forms.Label();
             this.btn_clear = new System.Windows.Forms.Button();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.groupBox7 = new System.Windows.Forms.GroupBox();
+            this.lbl_resultado = new System.Windows.Forms.Label();
+            this.btn_hipotesis = new System.Windows.Forms.Button();
+            this.txt_valor = new System.Windows.Forms.TextBox();
+            this.lbl_Valor = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.groupBox6 = new System.Windows.Forms.GroupBox();
+            this.lbl_gl = new System.Windows.Forms.Label();
             this.btn_pruebaChi = new System.Windows.Forms.Button();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
             this.lbl_chi = new System.Windows.Forms.Label();
@@ -71,6 +79,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvNumeros)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox2.SuspendLayout();
+            this.groupBox7.SuspendLayout();
+            this.groupBox6.SuspendLayout();
             this.groupBox4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.groupBox3.SuspendLayout();
@@ -81,7 +91,7 @@
             // txt_semilla
             // 
             this.txt_semilla.Location = new System.Drawing.Point(92, 26);
-            this.txt_semilla.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_semilla.Margin = new System.Windows.Forms.Padding(2);
             this.txt_semilla.Name = "txt_semilla";
             this.txt_semilla.Size = new System.Drawing.Size(76, 20);
             this.txt_semilla.TabIndex = 0;
@@ -89,7 +99,7 @@
             // txt_k
             // 
             this.txt_k.Location = new System.Drawing.Point(92, 66);
-            this.txt_k.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_k.Margin = new System.Windows.Forms.Padding(2);
             this.txt_k.Name = "txt_k";
             this.txt_k.Size = new System.Drawing.Size(76, 20);
             this.txt_k.TabIndex = 1;
@@ -97,7 +107,7 @@
             // txt_g
             // 
             this.txt_g.Location = new System.Drawing.Point(92, 106);
-            this.txt_g.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_g.Margin = new System.Windows.Forms.Padding(2);
             this.txt_g.Name = "txt_g";
             this.txt_g.Size = new System.Drawing.Size(76, 20);
             this.txt_g.TabIndex = 2;
@@ -106,7 +116,7 @@
             // 
             this.btn_generar.Enabled = false;
             this.btn_generar.Location = new System.Drawing.Point(23, 226);
-            this.btn_generar.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_generar.Margin = new System.Windows.Forms.Padding(2);
             this.btn_generar.Name = "btn_generar";
             this.btn_generar.Size = new System.Drawing.Size(61, 23);
             this.btn_generar.TabIndex = 3;
@@ -122,7 +132,7 @@
             "Congruencial Mixto",
             "Congruencial Multiplicativo"});
             this.cmb_metodo.Location = new System.Drawing.Point(92, 139);
-            this.cmb_metodo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmb_metodo.Margin = new System.Windows.Forms.Padding(2);
             this.cmb_metodo.Name = "cmb_metodo";
             this.cmb_metodo.Size = new System.Drawing.Size(128, 21);
             this.cmb_metodo.TabIndex = 4;
@@ -162,7 +172,7 @@
             // 
             this.txt_c.Enabled = false;
             this.txt_c.Location = new System.Drawing.Point(92, 167);
-            this.txt_c.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_c.Margin = new System.Windows.Forms.Padding(2);
             this.txt_c.Name = "txt_c";
             this.txt_c.Size = new System.Drawing.Size(76, 20);
             this.txt_c.TabIndex = 8;
@@ -186,7 +196,7 @@
             this.iteracion,
             this.numero});
             this.dgvNumeros.Location = new System.Drawing.Point(21, 17);
-            this.dgvNumeros.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dgvNumeros.Margin = new System.Windows.Forms.Padding(2);
             this.dgvNumeros.Name = "dgvNumeros";
             this.dgvNumeros.RowHeadersVisible = false;
             this.dgvNumeros.RowHeadersWidth = 51;
@@ -214,7 +224,7 @@
             // 
             this.btn_siguienteNumero.Enabled = false;
             this.btn_siguienteNumero.Location = new System.Drawing.Point(109, 226);
-            this.btn_siguienteNumero.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_siguienteNumero.Margin = new System.Windows.Forms.Padding(2);
             this.btn_siguienteNumero.Name = "btn_siguienteNumero";
             this.btn_siguienteNumero.Size = new System.Drawing.Size(106, 23);
             this.btn_siguienteNumero.TabIndex = 11;
@@ -237,9 +247,9 @@
             this.groupBox1.Controls.Add(this.lbl_semilla);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Location = new System.Drawing.Point(9, 10);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(238, 266);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
@@ -258,7 +268,7 @@
             // btn_clear
             // 
             this.btn_clear.Location = new System.Drawing.Point(44, 327);
-            this.btn_clear.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_clear.Margin = new System.Windows.Forms.Padding(2);
             this.btn_clear.Name = "btn_clear";
             this.btn_clear.Size = new System.Drawing.Size(142, 48);
             this.btn_clear.TabIndex = 13;
@@ -268,6 +278,8 @@
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.groupBox7);
+            this.groupBox2.Controls.Add(this.groupBox6);
             this.groupBox2.Controls.Add(this.btn_pruebaChi);
             this.groupBox2.Controls.Add(this.groupBox4);
             this.groupBox2.Controls.Add(this.dataGridView1);
@@ -280,19 +292,110 @@
             this.groupBox2.Controls.Add(this.label5);
             this.groupBox2.Controls.Add(this.cmb_generacion);
             this.groupBox2.Location = new System.Drawing.Point(478, 11);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox2.Size = new System.Drawing.Size(429, 388);
             this.groupBox2.TabIndex = 13;
             this.groupBox2.TabStop = false;
             this.groupBox2.Text = "Punto b) y c)";
             // 
+            // groupBox7
+            // 
+            this.groupBox7.Controls.Add(this.lbl_resultado);
+            this.groupBox7.Controls.Add(this.btn_hipotesis);
+            this.groupBox7.Controls.Add(this.txt_valor);
+            this.groupBox7.Controls.Add(this.lbl_Valor);
+            this.groupBox7.Controls.Add(this.label7);
+            this.groupBox7.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox7.ImeMode = System.Windows.Forms.ImeMode.KatakanaHalf;
+            this.groupBox7.Location = new System.Drawing.Point(256, 294);
+            this.groupBox7.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox7.Name = "groupBox7";
+            this.groupBox7.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox7.Size = new System.Drawing.Size(154, 81);
+            this.groupBox7.TabIndex = 11;
+            this.groupBox7.TabStop = false;
+            this.groupBox7.Text = "Hipótesis";
+            // 
+            // lbl_resultado
+            // 
+            this.lbl_resultado.AutoSize = true;
+            this.lbl_resultado.Location = new System.Drawing.Point(4, 54);
+            this.lbl_resultado.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_resultado.Name = "lbl_resultado";
+            this.lbl_resultado.Size = new System.Drawing.Size(120, 13);
+            this.lbl_resultado.TabIndex = 12;
+            this.lbl_resultado.Text = "Resultado Hipotesis";
+            // 
+            // btn_hipotesis
+            // 
+            this.btn_hipotesis.Location = new System.Drawing.Point(92, 23);
+            this.btn_hipotesis.Margin = new System.Windows.Forms.Padding(2);
+            this.btn_hipotesis.Name = "btn_hipotesis";
+            this.btn_hipotesis.Size = new System.Drawing.Size(58, 24);
+            this.btn_hipotesis.TabIndex = 12;
+            this.btn_hipotesis.Text = "Prueba";
+            this.btn_hipotesis.UseVisualStyleBackColor = true;
+            this.btn_hipotesis.Click += new System.EventHandler(this.Btn_hipotesis_Click);
+            // 
+            // txt_valor
+            // 
+            this.txt_valor.Location = new System.Drawing.Point(44, 26);
+            this.txt_valor.Margin = new System.Windows.Forms.Padding(2);
+            this.txt_valor.Name = "txt_valor";
+            this.txt_valor.Size = new System.Drawing.Size(38, 20);
+            this.txt_valor.TabIndex = 12;
+            // 
+            // lbl_Valor
+            // 
+            this.lbl_Valor.AutoSize = true;
+            this.lbl_Valor.Location = new System.Drawing.Point(0, 29);
+            this.lbl_Valor.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_Valor.Name = "lbl_Valor";
+            this.lbl_Valor.Size = new System.Drawing.Size(40, 13);
+            this.lbl_Valor.TabIndex = 12;
+            this.lbl_Valor.Text = "Valor:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(10, 30);
+            this.label7.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(0, 24);
+            this.label7.TabIndex = 0;
+            // 
+            // groupBox6
+            // 
+            this.groupBox6.Controls.Add(this.lbl_gl);
+            this.groupBox6.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox6.Location = new System.Drawing.Point(137, 294);
+            this.groupBox6.Margin = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Name = "groupBox6";
+            this.groupBox6.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox6.Size = new System.Drawing.Size(115, 81);
+            this.groupBox6.TabIndex = 10;
+            this.groupBox6.TabStop = false;
+            this.groupBox6.Text = "Grados Libertad";
+            this.groupBox6.Enter += new System.EventHandler(this.GroupBox6_Enter);
+            // 
+            // lbl_gl
+            // 
+            this.lbl_gl.AutoSize = true;
+            this.lbl_gl.Font = new System.Drawing.Font("Microsoft Sans Serif", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lbl_gl.Location = new System.Drawing.Point(10, 30);
+            this.lbl_gl.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lbl_gl.Name = "lbl_gl";
+            this.lbl_gl.Size = new System.Drawing.Size(0, 24);
+            this.lbl_gl.TabIndex = 0;
+            // 
             // btn_pruebaChi
             // 
             this.btn_pruebaChi.Enabled = false;
             this.btn_pruebaChi.Location = new System.Drawing.Point(146, 97);
-            this.btn_pruebaChi.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btn_pruebaChi.Margin = new System.Windows.Forms.Padding(2);
             this.btn_pruebaChi.Name = "btn_pruebaChi";
             this.btn_pruebaChi.Size = new System.Drawing.Size(106, 36);
             this.btn_pruebaChi.TabIndex = 10;
@@ -305,10 +408,10 @@
             this.groupBox4.Controls.Add(this.lbl_chi);
             this.groupBox4.Font = new System.Drawing.Font("Microsoft Sans Serif", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox4.Location = new System.Drawing.Point(16, 293);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
-            this.groupBox4.Size = new System.Drawing.Size(150, 81);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox4.Size = new System.Drawing.Size(114, 81);
             this.groupBox4.TabIndex = 9;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Chi-Cuadrado calculado";
@@ -320,9 +423,9 @@
             this.lbl_chi.Location = new System.Drawing.Point(10, 30);
             this.lbl_chi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lbl_chi.Name = "lbl_chi";
-            this.lbl_chi.Size = new System.Drawing.Size(139, 24);
+            this.lbl_chi.Size = new System.Drawing.Size(0, 24);
             this.lbl_chi.TabIndex = 0;
-            this.lbl_chi.Text = "Chi-Cuadrado";
+            this.lbl_chi.Click += new System.EventHandler(this.Lbl_chi_Click);
             // 
             // dataGridView1
             // 
@@ -335,7 +438,7 @@
             this.fEsperada,
             this.estPrueba});
             this.dataGridView1.Location = new System.Drawing.Point(15, 138);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowHeadersWidth = 51;
@@ -375,7 +478,7 @@
             // 
             this.rbtn_20.AutoSize = true;
             this.rbtn_20.Location = new System.Drawing.Point(280, 65);
-            this.rbtn_20.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtn_20.Margin = new System.Windows.Forms.Padding(2);
             this.rbtn_20.Name = "rbtn_20";
             this.rbtn_20.Size = new System.Drawing.Size(86, 17);
             this.rbtn_20.TabIndex = 7;
@@ -387,7 +490,7 @@
             // 
             this.rbtn_15.AutoSize = true;
             this.rbtn_15.Location = new System.Drawing.Point(193, 65);
-            this.rbtn_15.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtn_15.Margin = new System.Windows.Forms.Padding(2);
             this.rbtn_15.Name = "rbtn_15";
             this.rbtn_15.Size = new System.Drawing.Size(86, 17);
             this.rbtn_15.TabIndex = 6;
@@ -399,7 +502,7 @@
             // 
             this.rbtn_10.AutoSize = true;
             this.rbtn_10.Location = new System.Drawing.Point(105, 65);
-            this.rbtn_10.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtn_10.Margin = new System.Windows.Forms.Padding(2);
             this.rbtn_10.Name = "rbtn_10";
             this.rbtn_10.Size = new System.Drawing.Size(86, 17);
             this.rbtn_10.TabIndex = 5;
@@ -410,8 +513,9 @@
             // rbtn_5
             // 
             this.rbtn_5.AutoSize = true;
+            this.rbtn_5.Checked = true;
             this.rbtn_5.Location = new System.Drawing.Point(23, 66);
-            this.rbtn_5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.rbtn_5.Margin = new System.Windows.Forms.Padding(2);
             this.rbtn_5.Name = "rbtn_5";
             this.rbtn_5.Size = new System.Drawing.Size(80, 17);
             this.rbtn_5.TabIndex = 4;
@@ -433,7 +537,7 @@
             // 
             this.txt_cant_generada.Enabled = false;
             this.txt_cant_generada.Location = new System.Drawing.Point(336, 28);
-            this.txt_cant_generada.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txt_cant_generada.Margin = new System.Windows.Forms.Padding(2);
             this.txt_cant_generada.Name = "txt_cant_generada";
             this.txt_cant_generada.Size = new System.Drawing.Size(76, 20);
             this.txt_cant_generada.TabIndex = 2;
@@ -457,7 +561,7 @@
             "Random Lenguaje",
             "Congruencial Mixto"});
             this.cmb_generacion.Location = new System.Drawing.Point(104, 28);
-            this.cmb_generacion.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cmb_generacion.Margin = new System.Windows.Forms.Padding(2);
             this.cmb_generacion.Name = "cmb_generacion";
             this.cmb_generacion.Size = new System.Drawing.Size(114, 21);
             this.cmb_generacion.TabIndex = 0;
@@ -468,9 +572,9 @@
             this.groupBox3.Controls.Add(this.btn_clear);
             this.groupBox3.Controls.Add(this.dgvNumeros);
             this.groupBox3.Location = new System.Drawing.Point(252, 11);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox3.Size = new System.Drawing.Size(222, 388);
             this.groupBox3.TabIndex = 14;
             this.groupBox3.TabStop = false;
@@ -480,13 +584,14 @@
             // 
             this.groupBox5.Controls.Add(this.grafico);
             this.groupBox5.Location = new System.Drawing.Point(9, 411);
-            this.groupBox5.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox5.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox5.Size = new System.Drawing.Size(898, 272);
             this.groupBox5.TabIndex = 15;
             this.groupBox5.TabStop = false;
             this.groupBox5.Text = "Grafico";
+            this.groupBox5.Enter += new System.EventHandler(this.GroupBox5_Enter);
             // 
             // grafico
             // 
@@ -495,26 +600,27 @@
             legend1.Name = "Legend1";
             this.grafico.Legends.Add(legend1);
             this.grafico.Location = new System.Drawing.Point(4, 18);
-            this.grafico.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.grafico.Margin = new System.Windows.Forms.Padding(2);
             this.grafico.Name = "grafico";
             series1.ChartArea = "ChartArea1";
             series1.Legend = "Legend1";
             series1.Name = "Series1";
             this.grafico.Series.Add(series1);
-            this.grafico.Size = new System.Drawing.Size(875, 244);
+            this.grafico.Size = new System.Drawing.Size(877, 244);
             this.grafico.TabIndex = 0;
             this.grafico.Text = "chart1";
+            this.grafico.Click += new System.EventHandler(this.Grafico_Click);
             // 
             // Principal
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(916, 609);
+            this.ClientSize = new System.Drawing.Size(916, 693);
             this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox3);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "Principal";
             this.Text = "Generador de Números Aleatorios";
             ((System.ComponentModel.ISupportInitialize)(this.dgvNumeros)).EndInit();
@@ -522,6 +628,10 @@
             this.groupBox1.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
+            this.groupBox7.ResumeLayout(false);
+            this.groupBox7.PerformLayout();
+            this.groupBox6.ResumeLayout(false);
+            this.groupBox6.PerformLayout();
             this.groupBox4.ResumeLayout(false);
             this.groupBox4.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
@@ -571,6 +681,14 @@
         private System.Windows.Forms.GroupBox groupBox5;
         private System.Windows.Forms.DataVisualization.Charting.Chart grafico;
         private System.Windows.Forms.Button btn_pruebaChi;
+        private System.Windows.Forms.GroupBox groupBox6;
+        private System.Windows.Forms.Label lbl_gl;
+        private System.Windows.Forms.GroupBox groupBox7;
+        private System.Windows.Forms.Label lbl_resultado;
+        private System.Windows.Forms.Button btn_hipotesis;
+        private System.Windows.Forms.TextBox txt_valor;
+        private System.Windows.Forms.Label lbl_Valor;
+        private System.Windows.Forms.Label label7;
     }
 }
 
